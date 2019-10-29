@@ -1,3 +1,7 @@
+const Bootcamp = require('../models/Bootcamp')
+
+
+
 // @desc        Get all bootcamps
 // @route       GET /api/v1/bootcamps
 // @access      Public - do not need token
@@ -27,7 +31,13 @@ exports.getBootcamp = (req, res, next) => {
 // @desc        Create new bootcamp
 // @route       POST /api/v1/bootcamps
 // @access      Private - Have to be logged in / send a token
-exports.createBootcamp = (req, res, next) => {
+exports.createBootcamp = async (req, res, next) => {
+    const bootcamp = await Bootcamp.create(req.body)
+
+    res.status(201).json({
+        success: true,
+        data: bootcamp
+    })
     res
         .status(200)
         .json({
