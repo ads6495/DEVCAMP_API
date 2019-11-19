@@ -38,12 +38,7 @@ exports.createBootcamp = async (req, res, next) => {
         success: true,
         data: bootcamp
     })
-    res
-        .status(200)
-        .json({
-            success: true,
-            msg: 'create new bootcamps'
-        });
+
 }
 
 
