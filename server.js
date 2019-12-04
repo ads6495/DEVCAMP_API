@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const colors = require('colors')
 const connectDB = require('./config/db')
 
+const app = express()
 
 // Load env varis
 dotenv.config({
@@ -15,10 +16,6 @@ connectDB()
 
 //Route files
 const bootcamps = require('./routes/bootcamps')
-
-
-//middleware
-const app = express()
 
 //Body Parser
 app.use(express.json())

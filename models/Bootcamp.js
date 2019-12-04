@@ -3,16 +3,16 @@ const mongoose = require('mongoose')
 const BootcampSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'please add a name'],
+        required: [true, 'Please add a name'],
         unique: true,
         trim: true,
-        maxlength: [50, 'Name can not be over 50 characters']
+        maxlength: [50, 'Name can not be more than 50 characters']
     },
     slug: String,
     description: {
         type: String,
-        required: [true, 'please add a description'],
-        maxlength: [500, 'description can not be over 500 characters']
+        required: [true, 'Please add a description'],
+        maxlength: [500, 'Description can not be more than 500 characters']
     },
     website: {
         type: String,
@@ -22,6 +22,10 @@ const BootcampSchema = new mongoose.Schema({
         ]
     },
     phone: {
+        type: String,
+        maxlength: [20, 'Phone number can not be longer than 20 characters']
+    },
+    email: {
         type: String,
         match: [
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -33,25 +37,24 @@ const BootcampSchema = new mongoose.Schema({
         required: [true, 'Please add an address']
     },
     location: {
-        //GeoJSON Point
+        // GeoJSON Point
         type: {
             type: String,
-            enum: ['Point'],
-            required: true
+            enum: ['Point']
         },
         coordinates: {
             type: [Number],
-            required: true,
             index: '2dsphere'
         },
         formattedAddress: String,
         street: String,
         city: String,
+        state: String,
         zipcode: String,
         country: String
     },
     careers: {
-        //array of strings
+        // Array of strings
         type: [String],
         required: true,
         enum: [
@@ -65,8 +68,8 @@ const BootcampSchema = new mongoose.Schema({
     },
     averageRating: {
         type: Number,
-        min: [1, 'Rating must be atleast 1'],
-        max: [10, 'Rating can not be more than 10']
+        min: [1, 'Rating must be at least 1'],
+        max: [10, 'Rating must can not be more than 10']
     },
     averageCost: Number,
     photo: {
@@ -92,8 +95,7 @@ const BootcampSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    },
-
+    }
 })
 
 module.exports = mongoose.model('Bootcamp', BootcampSchema)
